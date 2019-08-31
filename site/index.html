@@ -1,0 +1,171 @@
+<html>
+<head>
+</head>
+<body><center>
+<table border=0 width=650>
+<tr><td style="text-align:justify">
+
+<h1>AHM Data Format &amp; AHM Data Set</h1>
+
+<table border="0" width="100%"><tr><td nowrap width="50">&nbsp;</b></td><td>
+<ul>
+<li><a href="#what_is_ahm">What is AHM?</a></li>
+<li><a href="#work">The Work of AHM and its Contributions</a></li>
+<li><a href="#donation">AHM Data Set Donated to the Public Domain</a></li>
+<li><a href="ahm-download.html">AHM Data Download</a></li>
+</ul>
+</td></tr></table>
+
+<hr>
+
+<a name="what_is_ahm"><h2>What is <i>AHM</i>?</h2></a>
+
+<p><i>AHM</i> stands for two things: an extended geo-data format, and a complete earth geo-data set.</p>
+
+<h3>AHM <i>the Data Format</i></h3>
+
+<p><i>AHM</i> is the acronym for <i>Annotated Height Map</i>, an extended data format to
+the HGT format used by SRTM data and its derivatives. AHM uses four bytes for each pixel; 
+the lower two bytes are the same as the signed 16-bit integer of height value (HGT value),
+and the higher two bytes are for annotation.</p>
+
+<p>Only the lowest three bits are defined; the rest of the bits are open for use.
+The rest of them are free for use in algorithms or customized AHM data.
+The pre-defined bits in the two high bytes are as follows:
+
+<pre>
+               Byte-0            Byte-1
+     ----------------- ----------------
+      7 6 5 4 3 2 1 0   7 6 5 4 3 2 1 0
+     ----------------- ----------------
+                      |           0 0 0    no-data
+                      |           0 0 1    land
+                      |           0 1 0    ocean
+                      |           0 1 1    lake
+                      |           1 0 0    river
+                      |           1 0 1    ocean-floor
+                      |           1 1 0      (reserved)
+                      |           1 1 1      (reserved)
+      ? ? ? ? ? ? ? ? | ? ? ? ? ?            (free use)
+    ------------------ -----------------
+</pre>
+
+<h3>AHM <i>the Data Set</i></h3>
+
+<p><i>AHM</i> is also the name of the complete new geo-data encoded in the AHM data format.
+The data set is not a mere re-encoding of existing data, but has these characteristics:
+
+<ol>
+<li>Water bodies are all encoded. No need of recalculation.</li>
+<li>All the small holes left by CGIAR-CSI are filled, using an effective small-hole-filling algorithm.</li>
+<li>Hand-edited and fixed a handful of tiles in the CGIAR-CSI data set that contain bad data.</li>
+</ol>
+</p>
+
+<p>Greater details are presented in the rest of this document.</p>
+
+<p>The result is the <b>AHM Data Set</b>, apparently the most satisfactory one along with
+SRTM3 and CGIAR-CSI for the -56&deg;&ndash;60&deg; latitude range. It contains no voids.</p>
+
+<hr>
+
+<a name="work"><h2>The Work of AHM and its Contributions</h2></a>
+
+<p>The work of AHM evolved from a personal project to use and fix 
+<a href="https://dds.cr.usgs.gov/srtm/version2_1/SRTM3/" taget="other">SRTM3</a>/<a 
+href="https://cgiarcsi.community/data/srtm-90m-digital-elevation-database-v4-1/" taget="other">CIGAR-CSIv4</a>
+ data, and progressed successfully, resulting in a complete new data set.</p>
+
+<h3>Apply Water Bodies</h3>
+
+<p>The first motivation is to apply water body SWBD data to the tiles.
+This has been calculated for all the land areas of the whole world.
+Here are a few examples (click to see full picture in another window):</p>
+
+<center>
+<a href="images/N31E120.ahm.png" target="other"><img src="images/N31E120.ahm.png" width="300" height="300" border="0"></a>
+<a href="images/N36E052.ahm.png" target="other"><img src="images/N36E052.ahm.png" width="300" height="300" border="0"></a><br>
+<a href="images/N37W123.ahm.png" target="other"><img src="images/N37W123.ahm.png" width="300" height="300" border="0"></a>
+<a href="images/N23E090.ahm.png" target="other"><img src="images/N23E090.ahm.png" width="300" height="300" border="0"></a>
+</center>
+
+<p>Precalculating water bodies has value. Applying water bodies is computationally intense and slow,
+and it is not as easy as it seems. With this pre-masking in the AHM data set, one can easily extract
+various types of earth surfaces.</p>
+
+<p>As of now, the ocean floor is not mapped. With the availability of ocean floor data,
+it should be feasible to fill in when the needs arise.</p>
+
+<h3>Fix Bad Data</h3>
+
+<p>As we know, CGIAR-CSI v4 is the <i>de facto</i> SRTM3-data-set-to-use, where the raw SRTM3 data set is
+practically unusable, despite the fact that the SRTM project is truly a technical marvel.
+There are still two issues with CGIAR-CSI v4, which may or may not be problems:
+<ol>
+<li>CGIAR-CSI has left small holes unfilled.</li>
+<li>There are a handful of tiles with bad or missing data.</li>
+</ol>
+</p>
+
+<h4>Filling small holes</h4>
+
+<p>Leaving small holes unfilled in CGIAR-CSI is probably intentional, as filling them is easy,
+where applications can choose or develop their own algorithms on this end.</p>
+
+<p>In AHM, small holes are filled with an algorithm that progresses from edge towards center,
+taking full advantage of the available information in the adjacent pixels.</p>
+
+<h4>The missing data cases</h4>
+
+<p>In the Amazon river range, there are a number of tiles with missing data (left):<br>
+<center>
+<a href="images/S04W073/S04W073.png" target="other"><img src="images/S04W073/S04W073.png" width="300" height="300" border="0"></a>
+<a href="images/S04W073/S04W073.output.png" target="other"><img src="images/S04W073/S04W073.output.png" width="300" height="300" border="0"></a>
+<br>
+<a href="images/S03W073/S03W073.png" target="other"><img src="images/S03W073/S03W073.png" width="300" height="300" border="0"></a>
+<a href="images/S03W073/S03W073.output.png" target="other"><img src="images/S03W073/S03W073.output.png" width="300" height="300" border="0"></a>
+</center></p>
+
+<p>By referencing various sources, the missing data are redrawn in place (see the right).</p>
+
+<h4>The bad data cases</h4>
+
+<p>There is one particularly bad data case in the adjacent tiles of S04W073 and S04W074.
+This also demonstrates the difference between SRTM3 (above) and CGIar-CSI (below):</p>
+
+<center>
+<a href="images/S06E146/S06E146_SRTM3.png" target="other"><img src="images/S06E146/S06E146_SRTM3.png" width="300" height="300" border="0"></a><a
+href="images/S06E147/S06E147_SRTM3.png" target="other"><img src="images/S06E147/S06E147_SRTM3.png" width="300" height="300" border="0"></a>
+</center>
+<br>
+<center>
+<a href="images/S06E146/S06E146_CSI.png" target="other"><img src="images/S06E146/S06E146_CSI.png" width="300" height="300" border="0"></a><a
+href="images/S06E147/S06E147_CSI.png" target="other"><img src="images/S06E147/S06E147_CSI.png" width="300" height="300" border="0"></a>
+</center>
+
+<p>The fix, which can still be improved, looks like this:</p>
+
+<center><img src="images/S06E146/S06E146_7x2_AHM.png" width="600" height="300" border="0"></center>
+
+<h4>Summary of data fixing</h4>
+
+<p>Overall, the CGIAR-CSI data set shows very high quality. Its number of bad or missing data is very low.
+They pose various challenges, but most of them are fixable to a satisfactory level.
+As earth data can never be 100% accurate, the AHM Data Set is one of the cleanest available
+for the -56&deg;&ndash;60&deg; latitude range.</p>
+
+<hr>
+<h2><a name="donation">AHM Data Set Donated to the Public Domain</a></h2>
+
+<p>To follow the great examples of STRM, CGIAR and other developers, the AHM Data Set is donated to the
+public domain in its completeness. Hopefully this data set will be useful for many people and projects.</p>
+
+<p>Follow the link to <a href="ahm-download.html">download the AHM Data Set</a>.</p>
+
+<hr>
+<center>&divonx; The End &divonx;</center>
+
+</td></tr>
+</table></center>
+</body></html>
+
