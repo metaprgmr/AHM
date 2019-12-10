@@ -18,7 +18,7 @@ package ahm;
  *                       |           0 1 1    lake
  *                       |           1 0 0    river
  *                       |           1 0 1    ocean-floor
- *                       |           1 1 0      (reserved)
+ *                       |           1 1 0    ocean-floor-no-data
  *                       |           1 1 1      (reserved)
  *       ? ? ? ? ? ? ? ? | ? ? ? ? ?            (free use)
  *     ------------------ -----------------
@@ -35,8 +35,8 @@ public class AHM {
         RIVER       (0x00030000),
         LAKE        (0x00040000),
         OCEAN_FLOOR (0x00050000),
-        RESERVED_1  (0x00060000),
-        RESERVED_2  (0x00070000);
+        OCEAN_FLOOR_NO_DATA (0x00060000),
+        RESERVED    (0x00070000);
 
         public final int flag;
         private SurfaceType(int flag) { this.flag = flag; }
@@ -49,8 +49,8 @@ public class AHM {
             case 0x030000: return RIVER;
             case 0x040000: return LAKE;
             case 0x050000: return OCEAN_FLOOR;
-            case 0x060000: return RESERVED_1;
-            case 0x070000: return RESERVED_2;
+            case 0x060000: return OCEAN_FLOOR_NO_DATA;
+            case 0x070000: return RESERVED;
             default:       throw new RuntimeException("Unknown surface type value: " + ((flag>>16) & 0x07));
             }
         }
