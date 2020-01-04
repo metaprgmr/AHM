@@ -56,7 +56,12 @@ public class AHM {
         }
     }
 
-    protected int[][] data; // [0,0] is the lower-left corner.
+    /**
+     * Annotated height values in row-major format.
+     * Value of (x, y) is <code>data[y][x]</code>;
+     * <code>data[0][0]</code> is the lower-left corner value.
+     */
+    protected int[][] data;
 
     public AHM(int[][] data) {
         this.data = data;
