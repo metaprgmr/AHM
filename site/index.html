@@ -80,7 +80,7 @@ href="https://cgiarcsi.community/data/srtm-90m-digital-elevation-database-v4-1/"
 <h3>Apply Water Bodies</h3>
 
 <p>The first motivation is to apply water body SWBD data to the tiles.
-This has been calculated for all the land areas of the whole world.
+This has been calculated for all the land areas of the whole world (so far in SRTM coverage).
 Here are a few examples (click to see full picture in another window):</p>
 
 <center>
@@ -103,15 +103,16 @@ it should be feasible to fill in when the needs arise.</p>
 practically unusable, despite the fact that the SRTM project is truly a technical marvel.
 There are still two issues with CGIAR-CSI v4, which may or may not be problems:
 <ol>
-<li>CGIAR-CSI has left small holes unfilled.</li>
+<li>CGIAR-CSI has small holes unfilled.</li>
 <li>There are a handful of tiles with bad or missing data.</li>
 </ol>
 </p>
 
 <h4>Filling small holes</h4>
 
-<p>Leaving small holes unfilled in CGIAR-CSI is probably intentional, as filling them is easy,
-where applications can choose or develop their own algorithms on this end.</p>
+<p>The small holes could be left by the joining of SRTM3 and other data sources (such as ASTER),
+meaning both data sources have missing data. Filling them is easy and effective, as room for
+error is very limited.</p>
 
 <p>In AHM, small holes are filled with an algorithm that progresses from edge towards center,
 taking full advantage of the available information in the adjacent pixels.</p>
