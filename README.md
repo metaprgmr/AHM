@@ -5,3 +5,5 @@ AHM is the acronym for _Annotated Height Map_, an extended data format to the HG
 As a project, AHM stands for two things: that data format, and a complete earth geo-data set. See [the site](https://metaprgmr.github.io/AHM/) for details.
 
 The main content is the AHM Data Set. A compact Java library is also furnished to read AHM data files.
+
+This is the foundation for this work (youtube): [My Homeland Afro-Eurasia in 3D](https://www.youtube.com/watch?v=JC9t2GMbIxs).
