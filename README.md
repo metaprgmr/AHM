@@ -7,4 +7,4 @@ As a project, AHM stands for two things: that data format, and a complete earth 
 The main content is the AHM Data Set. A compact Java library is also furnished to read AHM data files.
 
 This is the foundation for <i>this work</i>:<br>
-<a href="https://www.youtube.com/watch?v=JC9t2GMbIxs" title="My Homeland Afro-Eurasia in 3D"><img src="MyHomeland3D.png" width="834" height="267" border="0"></a>
+<a href="https://www.youtube.com/watch?v=JC9t2GMbIxs" title="My Homeland Afro-Eurasia in 3D"><img src="MyHomeland3D.png" width="834" height="467" border="0"></a>
