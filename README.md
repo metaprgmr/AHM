@@ -8,5 +8,3 @@ The main content is the AHM Data Set. A compact Java library is also furnished t
 
 This is the foundation for <i>this work</i>:<br>
 <a href="https://www.youtube.com/watch?v=JC9t2GMbIxs" title="My Homeland Afro-Eurasia in 3D"><img src="MyHomeland3D.png" width="834" height="467" border="0"></a>
-
-<iframe width="1113" height="626" src="https://www.youtube.com/embed/JC9t2GMbIxs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
